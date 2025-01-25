@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var messages, 
+    	number;
+
+/*********************************
+  try / catch code test
+*********************************/
+function getValue() {
+  messages = document.getElementById("error-message");
+  messages.innerHTML = ""; // Clear any previous error message
+  messages.style.color = "red"; // Set initial error color to red
+
+  number = document.getElementById("get-value").value.trim(); // Use .trim() to avoid issues with leading/trailing spaces
+  
+  try {
+    // Input validations using throw to trigger error messages
+    if (number == "") throw "is Empty";    
+    if (isNaN(number)) throw "is not a number";
+    if (number > 10) throw "is too Big";
+    if (number < 5) throw "is too Small";
+    
+    // Successful input condition
+    if (number == number) {  // Just a simple check to confirm number is not NaN
+        messages.style.color = "green";
+        messages.innerHTML = "Input is " + number;
+    }
+    
+  } catch(err) {
+      // If any error is caught, show it in red
+      messages.innerHTML = "Input " + err;
+  } finally {
+    // Clear the input value after handling the message
+    document.getElementById("get-value").value = "";
+  }
+
+  // Logging for debugging (after clearing the input)
+  console.log([typeof number, number]);
+}
+
+	</script>
+
+	<h3>Try Catch and throw</h3>
+	<h5>Input a number between 5 and 10</h5>
+	<input type="text" id = "get-value" value = ""  />
+	<button onclick="getValue()">Get value of input</button>
+	<p id = "error-message"></p>
+</body>
+</html>
